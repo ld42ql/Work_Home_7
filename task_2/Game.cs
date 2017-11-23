@@ -50,6 +50,7 @@ namespace task_2
         /// <returns></returns>
         string Result()
         {
+
             count++;
             if (userNumber == guessNumber)
             {
@@ -82,8 +83,18 @@ namespace task_2
             else
             {
                 flag = false;
-                return $"Неудача. Вы не отгадали число {guessNumber} за {maxCount}";
+                return $"Неудача. Вы не отгадали число {guessNumber} за {count}";
             }
+        }
+
+        /// <summary>
+        /// Следующая игра
+        /// </summary>
+        public void NextGame()
+        {
+            GuessNumber();
+            flag = true;
+            count = 0;
         }
     }
 }

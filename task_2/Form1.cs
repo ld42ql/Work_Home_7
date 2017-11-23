@@ -67,12 +67,38 @@ namespace task_2
             {
                 lblInfo.Text = game.GuessGame();
                 textBox1.Clear();
+                textBtn();
             }
             else
             {
-                MessageBox.Show("Игра окончена");
+                DialogResult result = MessageBox.Show("Заново?", "Игра окончена", MessageBoxButtons.OKCancel );
+                
+                if (result == DialogResult.OK)
+                {
+                    lblInfo.Text = $"Компьютер загадывает число в диапазоне от 1 до 100,\nа человек за " +
+                $"ограниченное число попыток должен угадать число.";
+                    game.NextGame();
+                    textBtn();
+                }
+                else
+                {
+                    Application.Exit();
+                }
             }
         }
 
+        private void textBtn()
+        {
+            switch (game.Count)
+            {
+                case 0: btn.Text = "Начали заново"; break;
+                case 1: btn.Text = "Попробую ещё раз"; break;
+                case 3: btn.Text = "Теперь точно повезет"; break;
+                case 5: btn.Text = "Я уверен, в этом числе"; break;
+                case 8: btn.Text = "Это моя последняя попытка"; break;
+                case 9: btn.Text = "У меня больше нет попыток"; break;
+                default: btn.Text = "Наверно, это число загадали"; break;
+            }
+        }
     }
 }
